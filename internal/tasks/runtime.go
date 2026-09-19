@@ -1,25 +1,25 @@
 package tasks
 
 import (
-	"database/sql"
 	"sync"
 	"time"
 
-	"github.com/ArteShow/DoThat/internal/database"
 	"github.com/ArteShow/DoThat/internal/database/repositories/tasks"
 )
 
 type TaskRegistry struct {
 	TaskRepository *tasks.TaskRepository
 	Tasks          map[string]tasks.Task
-	mu             sync.Mutex
+
+	latestErr error
+	mu        sync.Mutex
 }
 
-func NewTaskRegistry(db *sql.DB) *TaskRegistry {
+func NewTaskRegistry(repo *tasks.TaskRepository, registry map[string]tasks.Task) *TaskRegistry {
 	return &TaskRegistry{
-		TaskRepository: tasks.NewTaskRepository(&database.Database{DB: db}),
+		TaskRepository: repo,
 		mu:             sync.Mutex{},
-		Tasks:          make(map[string]tasks.Task),
+		Tasks:          registry,
 	}
 }
 
@@ -74,4 +74,14 @@ func (r *TaskRegistry) UpdateDeadline(id string, newDeadline time.Time) {
 	task.Deadline = newDeadline
 
 	r.Tasks[id] = task
+}
+
+func (r *TaskRegistry) GetError() error {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	err := r.latestErr
+	r.latestErr = nil
+
+	return err
 }

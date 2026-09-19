@@ -63,6 +63,7 @@ func (r *TaskRegistry) StartSync(ctx context.Context) error {
 		select {
 		case <-ticker.C:
 			if err := r.sync(); err != nil {
+				r.latestErr = err
 				return err
 			}
 		case <-ctx.Done():
