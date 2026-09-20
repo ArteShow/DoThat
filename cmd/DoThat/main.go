@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	db, err := database.Init("data/dothat.db")
+	db, err := database.Init("migrations", "data/dothat.db")
 	if err != nil {
 		panic(err)
 	}

@@ -1,12 +1,12 @@
 package database
 
-func Init(path string) (*Database, error) {
-	db, err := Connect(path)
+func Init(migrationPath, dbPath string) (*Database, error) {
+	db, err := Connect(dbPath)
 	if err != nil {
 		return &Database{}, err
 	}
 
-	if err = RunMigrations(db.DB, path); err != nil {
+	if err = RunMigrations(db.DB, migrationPath); err != nil {
 		return &Database{}, err
 	}
 
