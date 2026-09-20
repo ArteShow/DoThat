@@ -1,7 +1,7 @@
 package planner
 
 func (r *PlannerRepository) CreateEntry(entry PlannerEntry) error {
-	_, err := r.DB.Query(`
+	_, err := r.DB.Exec(`
 	INSERT INTO planner_entries 
 	VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 	`, entry.ID,
