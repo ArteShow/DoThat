@@ -11,7 +11,7 @@ import (
 
 type LearningManager struct {
 	WordsRepo       *words.WordRepository
-	PacksReo        *packs.PacksRepository
+	PacksRepo       *packs.PacksRepository
 	TranslationRepo *translations.TranslationsRepository
 }
 
@@ -20,7 +20,7 @@ func NewLearningManager(db *sql.DB) *LearningManager {
 		WordsRepo: words.NewWordRepository(
 			&database.Database{DB: db},
 		),
-		PacksReo: packs.NewPacksRepository(
+		PacksRepo: packs.NewPacksRepository(
 			&database.Database{DB: db},
 		),
 		TranslationRepo: translations.NewTranslationsRepository(
