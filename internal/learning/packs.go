@@ -10,10 +10,10 @@ func (m *LearningManager) DeletePack(id string) error {
 	return m.PacksRepo.DeletePack(id)
 }
 
-func (m *LearningManager) GetAll() ([]packs.LearningPack, error) {
+func (m *LearningManager) GetAllPacks() ([]packs.LearningPack, error) {
 	return m.PacksRepo.GetAll()
 }
 
-func (m *LearningManager) GetByID(id string) (packs.LearningPack, error) {
+func (m *LearningManager) GetPackByID(id string) (packs.LearningPack, error) {
 	return m.PacksRepo.GetByID(id)
 }
