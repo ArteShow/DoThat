@@ -21,3 +21,13 @@ type DeleteTaskRequest struct {
 type GetTaskByIDRequest struct {
 	TaskID string `json:"task_id"`
 }
+
+type UpdateTaskStatusRequest struct {
+	TaskID    string `json:"task_id"`
+	NewStatus string `json:"new_status"`
+}
+
+type UpdateTaskDeadlineRequest struct {
+	TaskID      string    `json:"task_id"`
+	NewDeadline time.Time `json:"new_deadline"`
+}

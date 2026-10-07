@@ -122,3 +122,41 @@ func (h *TaskHandler) GetTaskByID(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 }
+
+func (h *TaskHandler) UpdateTaskStatus(w http.ResponseWriter, r *http.Request) {
+	var req dto.UpdateTaskStatusRequest
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer r.Body.Close()
+
+	if err := json.Unmarshal(body, &req); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	h.TaskManager.UpdateStatus(req.TaskID, req.NewStatus)
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *TaskHandler) UpdateTaskDeadline(w http.ResponseWriter, r *http.Request) {
+	var req dto.UpdateTaskDeadlineRequest
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer r.Body.Close()
+
+	if err := json.Unmarshal(body, &req); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	h.TaskManager.UpdateDeadline(req.TaskID, req.NewDeadline)
+
+	w.WriteHeader(http.StatusOK)
+}
