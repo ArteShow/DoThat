@@ -25,3 +25,7 @@ type GetAllTasksResponse struct {
 type GetTaskByIDResponse struct {
 	Task TaskResponse `json:"task"`
 }
+
+type GetErrorResponse struct {
+	Error string `json:"error"`
+}

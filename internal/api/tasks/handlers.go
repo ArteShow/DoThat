@@ -160,3 +160,15 @@ func (h *TaskHandler) UpdateTaskDeadline(w http.ResponseWriter, r *http.Request)
 
 	w.WriteHeader(http.StatusOK)
 }
+
+func (h *TaskHandler) GetError(w http.ResponseWriter, r *http.Request) {
+	taskErr := h.TaskManager.GetError()
+
+	resp := dto.GetErrorResponse{Error: taskErr.Error()}
+	if err := json.NewEncoder(w).Encode(resp); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
