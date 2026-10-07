@@ -72,3 +72,53 @@ func (h *TaskHandler) DeleteTask(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 }
+
+func (h *TaskHandler) GetAllTasks(w http.ResponseWriter, r *http.Request) {
+	tasks := h.TaskManager.GetAll()
+
+	var resp dto.GetAllTasksResponse
+	for _, t := range tasks {
+		resp.Tasks = append(resp.Tasks, dto.TaskResponse{
+			ID:          t.ID,
+			Title:       t.Title,
+			Description: t.Description,
+			Deadline:    t.Deadline,
+			Duration:    t.Duration,
+			Status:      t.Status,
+			Priority:    t.Priority,
+			CreatedAt:   t.CreatedAt,
+			UpdatedAt:   t.UpdatedAt,
+		})
+	}
+
+	if err := json.NewEncoder(w).Encode(resp); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *TaskHandler) GetTaskByID(w http.ResponseWriter, r *http.Request) {
+	var req dto.GetTaskByIDRequest
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer r.Body.Close()
+
+	if err = json.Unmarshal(body, &req); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	task := h.TaskManager.GetByID(req.TaskID)
+
+	if err := json.NewEncoder(w).Encode(task); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
