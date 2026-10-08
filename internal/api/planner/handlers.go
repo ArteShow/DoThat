@@ -57,3 +57,26 @@ func (h *PlannerHandler) CreateEntryHandler(w http.ResponseWriter, r *http.Reque
 
 	w.WriteHeader(http.StatusCreated)
 }
+
+func (h *PlannerHandler) DeleteEntryHandler(w http.ResponseWriter, r *http.Request) {
+	var req dto.DeletePlannerEntryRequest
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer r.Body.Close()
+
+	if err = json.Unmarshal(body, &req); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if err = h.PlannerManager.DeleteEntry(req.EntryID); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
