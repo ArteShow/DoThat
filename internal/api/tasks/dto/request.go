@@ -3,7 +3,7 @@ package dto
 import "time"
 
 type CreateTaskRequest struct {
-	ID          string    `json:"task_it"`
+	ID          string    `json:"task_id"`
 	Title       string    `json:"title"`
 	Description string    `json:"description"`
 	Deadline    time.Time `json:"deadline"`
