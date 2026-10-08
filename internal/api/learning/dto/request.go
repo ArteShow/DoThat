@@ -13,3 +13,7 @@ type CreatePackRequest struct {
 type DeletePackRequest struct {
 	PackID string `json:"pack_id"`
 }
+
+type GetPackByIDRequest struct {
+	PackID string `json:"pack_id"`
+}
