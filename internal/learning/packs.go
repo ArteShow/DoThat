@@ -1,9 +1,15 @@
 package learning
 
-import "github.com/ArteShow/DoThat/internal/database/repositories/learning/packs"
+import (
+	"github.com/ArteShow/DoThat/internal/database/repositories/learning/packs"
+	"github.com/google/uuid"
+)
 
-func (m *LearningManager) CreatePack(pack packs.LearningPack) error {
-	return m.PacksRepo.CreatePack(pack)
+func (m *LearningManager) CreatePack(pack packs.LearningPack) (string, error) {
+	id := uuid.NewString()
+	pack.ID = id
+
+	return id, m.PacksRepo.CreatePack(pack)
 }
 
 func (m *LearningManager) DeletePack(id string) error {

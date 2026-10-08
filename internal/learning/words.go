@@ -4,14 +4,18 @@ import (
 	"errors"
 
 	"github.com/ArteShow/DoThat/internal/database/repositories/learning/words"
+	"github.com/google/uuid"
 )
 
-func (m *LearningManager) CreateWord(word words.Word) error {
+func (m *LearningManager) CreateWord(word words.Word) (string, error) {
+	id := uuid.NewString()
+	word.ID = id
+
 	if _, err := m.PacksRepo.GetByID(word.PackID); err != nil {
-		return errors.New("No pack found with pack id: " + word.PackID)
+		return "", errors.New("No pack found with pack id: " + word.PackID)
 	}
 
-	return m.WordsRepo.CreateWord(word)
+	return id, m.WordsRepo.CreateWord(word)
 }
 
 func (m *LearningManager) DeleteWord(id string) error {

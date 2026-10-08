@@ -4,14 +4,18 @@ import (
 	"errors"
 
 	"github.com/ArteShow/DoThat/internal/database/repositories/learning/translations"
+	"github.com/google/uuid"
 )
 
-func (m *LearningManager) CreateTransLation(translation translations.Translation) error {
+func (m *LearningManager) CreateTransLation(translation translations.Translation) (string, error) {
+	id := uuid.NewString()
+	translation.ID = id
+
 	if _, err := m.WordsRepo.GetByID(translation.WordID); err != nil {
-		return errors.New("No such words with id: " + translation.WordID)
+		return "", errors.New("No such words with id: " + translation.WordID)
 	}
 
-	return m.TranslationRepo.CreateNewTranslation(translation)
+	return id, m.TranslationRepo.CreateNewTranslation(translation)
 }
 
 func (m *LearningManager) DeleteTranslation(id string) error {
