@@ -15,3 +15,7 @@ type CreatePlannerEntryRequest struct {
 type DeletePlannerEntryRequest struct {
 	EntryID string `json:"entry_id"`
 }
+
+type GetEntryByIDRequest struct {
+	EntryID string `json:"entry_id"`
+}

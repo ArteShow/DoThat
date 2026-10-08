@@ -80,3 +80,59 @@ func (h *PlannerHandler) DeleteEntryHandler(w http.ResponseWriter, r *http.Reque
 	w.WriteHeader(http.StatusOK)
 }
 
+func (h *PlannerHandler) GetAllEntriesHandler(w http.ResponseWriter, r *http.Request) {
+	entries, err := h.PlannerManager.GetAllEntries()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	resp := dto.GetAllEntriesResponse{Entries: make([]dto.EntryResponse, len(entries))}
+	for _, e := range entries {
+		resp.Entries = append(resp.Entries, dto.EntryResponse{
+			ID:          e.ID,
+			TaskID:      e.TaskID,
+			Title:       e.Title,
+			Description: e.Description,
+			StartTime:   e.StartTime,
+			EndTime:     e.EndTime,
+			CreatedAt:   e.CreatedAt,
+			UpdatedAt:   e.UpdatedAt,
+		})
+	}
+
+	if err = json.NewEncoder(w).Encode(resp); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
+
+func (h *PlannerHandler) GetEntryByIDHandler(w http.ResponseWriter, r *http.Request) {
+	var req dto.GetEntryByIDRequest
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	defer r.Body.Close()
+
+	if err = json.Unmarshal(body, &req); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	entry, err := h.PlannerManager.GetByID(req.EntryID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if err = json.NewEncoder(w).Encode(entry); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
