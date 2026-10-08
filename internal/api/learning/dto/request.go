@@ -32,3 +32,7 @@ type DeleteWordRequest struct {
 type GetWordByIDRequest struct {
 	WordID string `json:"word_id"`
 }
+
+type GetWordsByPackIDRequest struct {
+	PackID string `json:"pack_id"`
+}

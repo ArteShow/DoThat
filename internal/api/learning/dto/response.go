@@ -42,3 +42,7 @@ type GetAllWordsResponse struct {
 type GetWordByIDResponse struct {
 	Word WordResponse `json:"word"`
 }
+
+type GetWordsByPackIDResponse struct {
+	Words []WordResponse `json:"words"`
+}

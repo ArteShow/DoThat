@@ -122,3 +122,41 @@ func (h *LearningHandler) GetWordByIDHandler(w http.ResponseWriter, r *http.Requ
 
 	w.WriteHeader(http.StatusOK)
 }
+
+func (h *LearningHandler) GetWordsByPackIDHandler(w http.ResponseWriter, r *http.Request) {
+	var req dto.GetWordsByPackIDRequest
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if err = json.Unmarshal(body, &req); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	words, err := h.LearningManager.GetWordsByPackID(req.PackID)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	resp := dto.GetWordsByPackIDResponse{Words: make([]dto.WordResponse, len(words))}
+	for _, w := range words {
+		resp.Words = append(resp.Words, dto.WordResponse{
+			ID:        w.ID,
+			Word:      w.Word,
+			PackID:    w.PackID,
+			CreatedAt: w.CreatedAt,
+			UpdatedAt: w.UpdatedAt,
+		})
+	}
+
+	if err = json.NewEncoder(w).Encode(resp); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+}
