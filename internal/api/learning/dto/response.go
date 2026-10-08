@@ -22,3 +22,23 @@ type GetAllPacksResponse struct {
 type GetPackByIDResponse struct {
 	Pack PackResponse `json:"pack"`
 }
+
+type CreateWordResponse struct {
+	WordID string `json:"word_id"`
+}
+
+type WordResponse struct {
+	ID        string    `json:"id"`
+	PackID    string    `json:"pack_id"`
+	Word      string    `json:"word"`
+	CreatedAt time.Time `json:"create_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+type GetAllWordsResponse struct {
+	Words []WordResponse `json:"words"`
+}
+
+type GetWordByIDResponse struct {
+	Word WordResponse `json:"word"`
+}

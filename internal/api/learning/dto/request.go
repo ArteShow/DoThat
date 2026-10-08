@@ -17,3 +17,18 @@ type DeletePackRequest struct {
 type GetPackByIDRequest struct {
 	PackID string `json:"pack_id"`
 }
+
+type CreateWordRequest struct {
+	PackID    string    `json:"pack_id"`
+	Word      string    `json:"word"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+type DeleteWordRequest struct {
+	WordID string `json:"word_id"`
+}
+
+type GetWordByIDRequest struct {
+	WordID string `json:"word_id"`
+}
