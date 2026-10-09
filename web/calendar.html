@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>DoThat! — Calendar</title>
 
     <link rel="stylesheet" href="/assets/css/style.css">
@@ -12,11 +13,13 @@
 
     <script src="/assets/js/api.js" defer></script>
     <script src="/assets/js/app.js" defer></script>
+    <script src="/assets/js/calendar.js" defer></script>
 </head>
 
 <body>
     <aside class="sidebar">
         <a class="logo" href="/">DoThat<span>!</span></a>
+
         <nav>
             <a class="nav-link" href="/">Dashboard</a>
             <a class="nav-link" href="/tasks.html">Tasks</a>
@@ -30,16 +33,82 @@
             <div>
                 <p class="eyebrow">PLAN YOUR TIME</p>
                 <h1>Calendar</h1>
-                <p class="subtitle">Your tasks and scheduled events in one place.</p>
+                <p class="subtitle">Your schedule, your way.</p>
             </div>
+<button class="button" id="toggle-create-form" type="button">
+    + New event
+</button>
         </header>
 
-        <section class="card section-card">
-            <h2>Your schedule</h2>
-            <p class="muted">
-                We'll connect this view to your planner API next.
-            </p>
-            <div id="calendar-view"></div>
+        <section class="card section-card create-event-card" id="create-event-card" hidden>
+            <div class="section-header">
+                <h2>Create an event</h2>
+                <button class="small-button" id="cancel-create" type="button">
+                    Cancel
+                </button>
+            </div>
+        
+            <form id="create-event-form" class="task-form">
+                <label for="event-title">Title</label>
+                <input id="event-title" name="title" type="text" maxlength="200" placeholder="e.g. German lesson" required>
+        
+                <label for="event-description">Description</label>
+                <textarea id="event-description" name="description" rows="2" placeholder="Optional details..."></textarea>
+        
+                <label for="event-task-id">Linked task ID (optional)</label>
+                <input id="event-task-id" name="task_id" type="text" placeholder="Link an existing task">
+        
+                <div class="form-grid">
+                    <div>
+                        <label for="event-start">Starts</label>
+                        <input id="event-start" name="start_time" type="datetime-local" required>
+                    </div>
+        
+                    <div>
+                        <label for="event-end">Ends (optional)</label>
+                        <input id="event-end" name="end_time" type="datetime-local">
+                    </div>
+                </div>
+        
+                <button class="button" type="submit">Save event</button>
+                <p id="event-form-message" class="form-message" aria-live="polite"></p>
+            </form>
+        </section>
+        
+        <section class="card calendar-card">
+            <div class="calendar-toolbar">
+                <div class="calendar-navigation">
+                    <button class="icon-button" id="calendar-prev" type="button" aria-label="Previous period">‹</button>
+        
+                    <h2 id="calendar-heading">Loading calendar...</h2>
+        
+                    <button class="icon-button" id="calendar-next" type="button" aria-label="Next period">›</button>
+        
+                    <button class="small-button" id="calendar-today" type="button">
+                        Today
+                    </button>
+                </div>
+        
+                <div class="calendar-modes" role="group" aria-label="Calendar view">
+                    <button class="mode-button active" data-mode="timetable" type="button">
+                        Timetable
+                    </button>
+                    <button class="mode-button" data-mode="paper" type="button">
+                        Paper
+                    </button>
+                </div>
+            </div>
+        
+            <div id="calendar-status" class="form-message" aria-live="polite"></div>
+        
+            <div id="calendar-view" class="calendar-view">
+                <p class="muted">Loading events...</p>
+            </div>
+        </section>
+        
+        <section class="card section-card selected-day-card" id="selected-day-card" hidden>
+            <h2 id="selected-day-heading">Events</h2>
+            <div id="selected-day-events"></div>
         </section>
     </main>
 </body>

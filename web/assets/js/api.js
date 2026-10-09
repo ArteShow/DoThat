@@ -51,3 +51,23 @@ function apiUpdateTaskStatus(taskID, newStatus) {
         }),
     });
 }
+
+function apiGetPlannerEntries() {
+    return apiRequest("/planner/");
+}
+
+function apiCreatePlannerEntry(entry) {
+    return apiRequest("/planner/", {
+        method: "POST",
+        body: JSON.stringify(entry),
+    });
+}
+
+function apiDeletePlannerEntry(entryID) {
+    return apiRequest("/planner/", {
+        method: "DELETE",
+        body: JSON.stringify({
+            entry_id: entryID,
+        }),
+    });
+}
