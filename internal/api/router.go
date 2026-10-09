@@ -1,6 +1,8 @@
 package api
 
 import (
+	"net/http"
+
 	learning_handler "github.com/ArteShow/DoThat/internal/api/learning"
 	planner_handler "github.com/ArteShow/DoThat/internal/api/planner"
 	task_handler "github.com/ArteShow/DoThat/internal/api/tasks"
@@ -21,10 +23,13 @@ func NewRouter(taskManager *task_service.TaskManager, plannerManager *planer_ser
 	plannerHandler := planner_handler.NewPlannerHandler(plannerManager)
 	learningHandler := learning_handler.NewLearningHandler(learningManager)
 
-	r.Route("/api/v1/tasks", func(r chi.Router) {
-		r.Mount("/", task_handler.NewTaskRouter(taskHandler))
-		r.Mount("/", planner_handler.NewRouter(plannerHandler))
-		r.Mount("/", learning_handler.NewRouter(learningHandler))
+	r.Mount("/api/v1/tasks", task_handler.NewTaskRouter(taskHandler))
+	r.Mount("/api/v1/planner", planner_handler.NewRouter(plannerHandler))
+	r.Mount("/api/v1/learning", learning_handler.NewRouter(learningHandler))
+
+	r.Get("/api/v1/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("ok"))
 	})
 
 	return &Router{
