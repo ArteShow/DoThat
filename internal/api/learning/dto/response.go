@@ -46,3 +46,28 @@ type GetWordByIDResponse struct {
 type GetWordsByPackIDResponse struct {
 	Words []WordResponse `json:"words"`
 }
+
+type CreateTranslationResponse struct {
+	TranslationID string `json:"translation_id"`
+}
+
+type TranslationResponse struct {
+	ID          string    `json:"id"`
+	WordID      string    `json:"word_id"`
+	Language    string    `json:"language"`
+	Translation string    `json:"translation"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
+}
+
+type GetAllTranslationsResponse struct {
+	Translations []TranslationResponse `json:"translations"`
+}
+
+type GetTranslationByIDResponse struct {
+	Translation TranslationResponse `json:"translation"`
+}
+
+type GetTranslationsByWordIDResponse struct {
+	Translations []TranslationResponse `json:"translation"`
+}

@@ -36,3 +36,23 @@ type GetWordByIDRequest struct {
 type GetWordsByPackIDRequest struct {
 	PackID string `json:"pack_id"`
 }
+
+type CreateTranslationRequest struct {
+	WordID      string    `json:"word_id"`
+	Language    string    `json:"language"`
+	Translation string    `json:"translation"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
+}
+
+type DeleteTranslationRequest struct {
+	TranslationID string `json:"translation_id"`
+}
+
+type GetTranslationByIDRequest struct {
+	TranslationID string `json:"translation_id"`
+}
+
+type GetTranslationsByWordIDRequest struct {
+	WordID string `json:"word_id"`
+}
