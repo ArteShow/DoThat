@@ -41,7 +41,6 @@ func (h *LearningHandler) CreateTranslationHandler(w http.ResponseWriter, r *htt
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
 }
 
 func (h *LearningHandler) DeleteTranslationHandler(w http.ResponseWriter, r *http.Request) {
@@ -89,7 +88,6 @@ func (h *LearningHandler) GetAllTranslationsHandler(w http.ResponseWriter, r *ht
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 }
 
 func (h *LearningHandler) GetTranslationByIDHandler(w http.ResponseWriter, r *http.Request) {
@@ -126,7 +124,6 @@ func (h *LearningHandler) GetTranslationByIDHandler(w http.ResponseWriter, r *ht
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 }
 
 func (h *LearningHandler) GetTranslationByWordIDHandler(w http.ResponseWriter, r *http.Request) {
@@ -166,5 +163,4 @@ func (h *LearningHandler) GetTranslationByWordIDHandler(w http.ResponseWriter, r
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 }

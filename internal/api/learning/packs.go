@@ -36,8 +36,6 @@ func (h *LearningHandler) CreatePackHandler(w http.ResponseWriter, r *http.Reque
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	w.WriteHeader(http.StatusCreated)
 }
 
 func (h *LearningHandler) DeletePackHandler(w http.ResponseWriter, r *http.Request) {
@@ -86,7 +84,6 @@ func (h *LearningHandler) GetAllPacksHandler(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 }
 
 func (h *LearningHandler) GetPackByIDHandler(w http.ResponseWriter, r *http.Request) {
@@ -122,6 +119,4 @@ func (h *LearningHandler) GetPackByIDHandler(w http.ResponseWriter, r *http.Requ
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	w.WriteHeader(http.StatusOK)
 }

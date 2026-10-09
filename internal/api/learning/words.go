@@ -36,7 +36,6 @@ func (h *LearningHandler) CreateWordHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	w.WriteHeader(http.StatusCreated)
 }
 
 func (h *LearningHandler) DeleteWordHandler(w http.ResponseWriter, r *http.Request) {
@@ -84,7 +83,6 @@ func (h *LearningHandler) GetAllWordsHandler(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 }
 
 func (h *LearningHandler) GetWordByIDHandler(w http.ResponseWriter, r *http.Request) {
@@ -120,7 +118,6 @@ func (h *LearningHandler) GetWordByIDHandler(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 }
 
 func (h *LearningHandler) GetWordsByPackIDHandler(w http.ResponseWriter, r *http.Request) {
@@ -158,5 +155,4 @@ func (h *LearningHandler) GetWordsByPackIDHandler(w http.ResponseWriter, r *http
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 }

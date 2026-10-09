@@ -54,8 +54,6 @@ func (h *PlannerHandler) CreateEntryHandler(w http.ResponseWriter, r *http.Reque
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	w.WriteHeader(http.StatusCreated)
 }
 
 func (h *PlannerHandler) DeleteEntryHandler(w http.ResponseWriter, r *http.Request) {
@@ -106,7 +104,6 @@ func (h *PlannerHandler) GetAllEntriesHandler(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 }
 
 func (h *PlannerHandler) GetEntryByIDHandler(w http.ResponseWriter, r *http.Request) {
@@ -134,5 +131,4 @@ func (h *PlannerHandler) GetEntryByIDHandler(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	w.WriteHeader(http.StatusOK)
 }
