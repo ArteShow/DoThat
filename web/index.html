@@ -1,11 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>DoThat! — Dashboard</title>
+    
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+    
+    <script src="/assets/js/api.js" defer></script>
+    <script src="/assets/js/app.js" defer></script>
 </head>
+
 <body>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, quam ipsum error, illum reprehenderit voluptatibus dicta ad sit exercitationem unde a earum hic optio. Nulla totam doloribus ipsa perspiciatis consequuntur!
+    <aside class="sidebar">
+        <a class="logo" href="/">DoThat<span>!</span></a>
+    
+        <nav>
+            <a class="nav-link active" href="/">Dashboard</a>
+            <a class="nav-link" href="/tasks.html">Tasks</a>
+            <a class="nav-link" href="/calendar.html">Calendar</a>
+            <a class="nav-link" href="/learning.html">Learning</a>
+        </nav>
+    </aside>
+    
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">YOUR WORKSPACE</p>
+                <h1>Dashboard</h1>
+                <p class="subtitle">A clear view of what you need to do.</p>
+            </div>
+    
+            <a class="button" href="/tasks.html">+ New task</a>
+        </header>
+    
+        <section class="stats-grid">
+            <article class="card">
+                <p class="card-label">Upcoming tasks</p>
+                <h2 id="upcoming-count">—</h2>
+            </article>
+    
+            <article class="card">
+                <p class="card-label">Completed tasks</p>
+                <h2 id="completed-count">—</h2>
+            </article>
+    
+            <article class="card">
+                <p class="card-label">Today's schedule</p>
+                <h2 id="schedule-count">—</h2>
+            </article>
+        </section>
+    
+        <section class="card section-card">
+            <div class="section-header">
+                <div>
+                    <h2>Coming up</h2>
+                    <p class="subtitle">Your next tasks.</p>
+                </div>
+                <a href="/tasks.html">View all →</a>
+            </div>
+    
+            <div id="upcoming-tasks">
+                <p class="muted">Loading tasks...</p>
+            </div>
+        </section>
+    </main>
 </body>
+
 </html>

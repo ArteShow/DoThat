@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoThat! — Tasks</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+
+    <script src="/assets/js/api.js" defer></script>
+    <script src="/assets/js/app.js" defer></script>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <a class="logo" href="/">DoThat<span>!</span></a>
+        <nav>
+            <a class="nav-link" href="/">Dashboard</a>
+            <a class="nav-link active" href="/tasks.html">Tasks</a>
+            <a class="nav-link" href="/calendar.html">Calendar</a>
+            <a class="nav-link" href="/learning.html">Learning</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">STAY ORGANIZED</p>
+                <h1>Tasks</h1>
+                <p class="subtitle">Everything you need to get done.</p>
+            </div>
+        </header>
+
+        <section class="card section-card">
+            <div class="section-header">
+                <h2>All tasks</h2>
+                <button class="button" id="refresh-tasks">Refresh</button>
+            </div>
+
+            <div id="all-tasks">
+                <p class="muted">Loading tasks...</p>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

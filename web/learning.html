@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoThat! — Learning</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+
+    <script src="/assets/js/api.js" defer></script>
+    <script src="/assets/js/app.js" defer></script>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <a class="logo" href="/">DoThat<span>!</span></a>
+        <nav>
+            <a class="nav-link" href="/">Dashboard</a>
+            <a class="nav-link" href="/tasks.html">Tasks</a>
+            <a class="nav-link" href="/calendar.html">Calendar</a>
+            <a class="nav-link active" href="/learning.html">Learning</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">KEEP LEARNING</p>
+                <h1>Learning</h1>
+                <p class="subtitle">Practice vocabulary at your own pace.</p>
+            </div>
+        </header>
+
+        <section class="card section-card">
+            <h2>Your vocabulary packs</h2>
+            <p class="muted">Your learning packs will appear here once we connect the learning API.</p>
+            <div id="learning-packs"></div>
+        </section>
+    </main>
+</body>
+
+</html>

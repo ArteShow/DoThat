@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DoThat! — Calendar</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/layout.css">
+    <link rel="stylesheet" href="/assets/css/components.css">
+
+    <script src="/assets/js/api.js" defer></script>
+    <script src="/assets/js/app.js" defer></script>
+</head>
+
+<body>
+    <aside class="sidebar">
+        <a class="logo" href="/">DoThat<span>!</span></a>
+        <nav>
+            <a class="nav-link" href="/">Dashboard</a>
+            <a class="nav-link" href="/tasks.html">Tasks</a>
+            <a class="nav-link active" href="/calendar.html">Calendar</a>
+            <a class="nav-link" href="/learning.html">Learning</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">PLAN YOUR TIME</p>
+                <h1>Calendar</h1>
+                <p class="subtitle">Your tasks and scheduled events in one place.</p>
+            </div>
+        </header>
+
+        <section class="card section-card">
+            <h2>Your schedule</h2>
+            <p class="muted">Your calendar will appear here once we connect the planner API.</p>
+            <div id="calendar-view"></div>
+        </section>
+    </main>
+</body>
+
+</html>
