@@ -10,16 +10,44 @@ async function apiRequest(path, options = {}) {
     });
 
     if (!response.ok) {
-        throw new Error(`API request failed: ${response.status}`);
+        const message = await response.text();
+        throw new Error(message || `Request failed: ${response.status}`);
     }
 
     if (response.status === 204) {
         return null;
     }
 
-    return response.json();
+    const text = await response.text();
+    return text ? JSON.parse(text) : null;
 }
 
-async function getTasks() {
+function apiGetTasks() {
     return apiRequest("/tasks/");
+}
+
+function apiCreateTask(task) {
+    return apiRequest("/tasks/", {
+        method: "POST",
+        body: JSON.stringify(task),
+    });
+}
+
+function apiDeleteTask(taskID) {
+    return apiRequest("/tasks/", {
+        method: "DELETE",
+        body: JSON.stringify({
+            task_id: taskID,
+        }),
+    });
+}
+
+function apiUpdateTaskStatus(taskID, newStatus) {
+    return apiRequest("/tasks/status", {
+        method: "PATCH",
+        body: JSON.stringify({
+            task_id: taskID,
+            new_status: newStatus,
+        }),
+    });
 }
