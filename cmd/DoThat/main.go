@@ -41,6 +41,26 @@ func main() {
 	// HTTP init
 	router := api.NewRouter(taskManager, plannerManager, learningManager)
 
+	webHandler := http.FileServer(http.Dir("./web"))
+
+	router.Router.Get("/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, "./web/index.html")
+	})
+
+	router.Router.Handle("/assets/*", http.StripPrefix(
+		"/assets/",
+		http.FileServer(http.Dir("./web/assets")),
+	))
+
+	router.Router.NotFound(func(w http.ResponseWriter, r *http.Request) {
+		if len(r.URL.Path) >= 4 && r.URL.Path[:4] == "/api" {
+			http.NotFound(w, r)
+			return
+		}
+
+		webHandler.ServeHTTP(w, r)
+	})
+
 	server := &http.Server{
 		Addr:              ":8080",
 		Handler:           router.Router,
